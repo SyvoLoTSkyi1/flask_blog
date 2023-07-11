@@ -47,6 +47,7 @@ def delete_post(id):
 
     return redirect(url_for('views.home'))
 
+
 @views.route('/posts/<username>')
 @login_required
 def posts(username):
@@ -56,5 +57,5 @@ def posts(username):
         flash('No user with that username exists.', category='error')
         return redirect(url_for('views.home'))
 
-    posts = Post.query.filter_by(author=user.id).all()
+    posts = user.posts
     return render_template('posts.html', user=current_user, posts=posts, username=username)
