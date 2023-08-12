@@ -39,7 +39,7 @@ def delete_post(id):
 
     if not post:
         flash("Post does not exist.", category='error')
-    elif current_user.id != post.id:
+    elif current_user.id != post.author:
         flash('You do not have permission to delete this post', category='error')
     else:
         db.session.delete(post)
@@ -85,7 +85,7 @@ def create_comment(post_id):
 @views.route("/delete-comment/<comment_id>")
 @login_required
 def delete_comment(comment_id):
-    comment = Comment.query.filtered_by(id=comment_id).first()
+    comment = Comment.query.filter_by(id=comment_id).first()
 
     if not comment:
         flash('Comment does not exist.', category='error')
