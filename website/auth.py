@@ -13,16 +13,20 @@ def login():
         email = request.form.get("email")
         password = request.form.get("password")
 
-        user = User.query.filter_by(email=email).first()
-        if user:
-            if check_password_hash(user.password, password):
-                flash('Logged in!')
-                login_user(user, remember=True)
-                return redirect(url_for('views.home'))
-            else:
-                flash('Password is incorrect.', category='error')
+        if not email or not password:
+            flash('Email or Password cannot be empty', category='error')
         else:
-            flash('Email does not exist.', category='error')
+
+            user = User.query.filter_by(email=email).first()
+            if user:
+                if check_password_hash(user.password, password):
+                    flash('Logged in!')
+                    login_user(user, remember=True)
+                    return redirect(url_for('views.home'))
+                else:
+                    flash('Password is incorrect.', category='error')
+            else:
+                flash('Email does not exist.', category='error')
 
     return render_template("login.html", user=current_user)
 
