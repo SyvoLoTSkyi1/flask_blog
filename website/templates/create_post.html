@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+{% block title %}Create Post{% endblock %}
+{% block header %}Create a Post{% endblock %}
+{% block content %}
+<div><a>Write something you would like to post below.</a></div>
+<div><a>Remember that post can't be empty.</a></div>
+<br>
+<form method="POST">
+    <textarea name="text" id="text" class="form-control"></textarea>
+    <br>
+    <div align="center">
+        <button style="margin:10px;" type="submit" class="btn btn-lg btn-primary">Post</button>
+        <a href="javascript:history.back()">
+            <button style="margin:10px;" type="button" class="btn btn-lg btn-secondary">Back</button>
+        </a>
+    </div>
+</form>
+<br>
+{% endblock %}
